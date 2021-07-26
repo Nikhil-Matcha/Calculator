@@ -9,25 +9,47 @@
 </head>
 <body>
 	<div id="bmi"></div>
+	<div id="result"></div>
 	<script type="text/babel">
 		class BMI extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {
+					"height" : null,
+					"weight" : null,
+				};
+			}
+
 			render() {
 				return (
 					<div>
 						<h1>BMI Calculator</h1>
-						<form>
-							<label>Height: </label>
-							<input type="number" name="height" id="height" />
-							<label>Weight: </label>
-							<input type="number" name="weight" id="weight" />
-							<input type="submit" name="Submit" onClick={this.handleClick}/>
+						<form onSubmit={this.handleSubmit}>
+							<label>Height (in cm) : </label>
+							<input type="number" name="height" id="height" onChange={this.handleChange} />
+							<label>Weight (in kg) : </label>
+							<input type="number" name="weight" id="weight" onChange={this.handleChange} />
+							<input type="submit" name="Submit" />
 						</form>
 					</div>
 				);
 			}
 
-			handleClick = () => {
-				alert("Submitted!");
+			calculateBMI = (h, w) => {
+				var h1 = h/100;
+				var res = w / (h1 * h1);
+				return res;
+			}
+
+			handleChange = (event) => {
+				let key = event.target.name;
+				let val = event.target.value;
+				this.setState({[key] : val});
+			}
+
+			handleSubmit = (event) => {
+				event.preventDefault();
+				document.querySelector("#result").innerHTML = "Your BMI is " + this.calculateBMI(this.state.height, this.state.weight);
 			}
 		}
 
