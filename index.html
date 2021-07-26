@@ -3,6 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<title>Calculator</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
@@ -27,8 +28,12 @@
 						<form onSubmit={this.handleSubmit}>
 							<label>Height (in cm) : </label>
 							<input type="number" name="height" id="height" onChange={this.handleChange} />
+							<br/>
+							<br/>
 							<label>Weight (in kg) : </label>
 							<input type="number" name="weight" id="weight" onChange={this.handleChange} />
+							<br/>
+							<br/>
 							<input type="submit" name="Submit" />
 						</form>
 					</div>
@@ -50,6 +55,15 @@
 			handleSubmit = (event) => {
 				event.preventDefault();
 				document.querySelector("#result").innerHTML = "Your BMI is " + this.calculateBMI(this.state.height, this.state.weight);
+				if (this.calculateBMI(this.state.height, this.state.weight) < 18){
+					document.querySelector("#result").innerHTML += "<br/>" + "<p class='thin'>You are Thin!</p>";
+				}
+				else if (this.calculateBMI(this.state.height, this.state.weight) < 25){
+					document.querySelector("#result").innerHTML += "<br/>" + "<p class='normal'>You are Normal!</p>";
+				}
+				else {
+					document.querySelector("#result").innerHTML += "<br/>" + "<p class='fat'>You are Fat!</p>";
+				}
 			}
 		}
 

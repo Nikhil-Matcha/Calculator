@@ -1,0 +1,16 @@
+#result {
+	font-size: 20px;
+	color: darkmagenta;
+}
+
+.thin {
+	color: red;
+}
+
+.normal {
+	color: green;
+}
+
+.fat {
+	color: red;
+}
